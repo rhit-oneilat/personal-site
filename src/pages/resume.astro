@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ResumeSection from '../components/ResumeSection.astro';
+---
+
+<Layout title="Resume | Aidan O'Neil">
+
+  <main class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold text-gruvbox-fg mb-8">Resume</h1>
+
+    <div class="bg-gruvbox-bg1 rounded-lg shadow-xl p-8">
+      <!-- Education Section -->
+      <ResumeSection
+        title="Education"
+        items={[
+          {
+            title: "Rose-Hulman Institute of Technology",
+            subtitle: "B.S. Mathematics & Data Science",
+            period: "2020 - 2024",
+            description: "Focused on applied mathematics and statistical modeling. Minor in Economics."
+          }
+        ]}
+      />
+
+      <!-- Experience Section -->
+      <ResumeSection
+        title="Experience"
+        items={[
+          {
+            title: "Data Science Consultant",
+            subtitle: "ABC Analytics",
+            period: "2023 - Present",
+            description: "Developed forecasting models for inventory optimization, reducing stockouts by 35% and improving customer satisfaction metrics."
+          },
+          {
+            title: "Research Assistant",
+            subtitle: "Rose-Hulman Mathematics Department",
+            period: "2022 - 2023",
+            description: "Conducted research on applied statistical methods for time series forecasting with applications in renewable energy."
+          }
+        ]}
+      />
+
+      <!-- Skills Section -->
+      <ResumeSection
+        title="Skills"
+        items={[
+          {
+            title: "Programming",
+            description: "Python, R, SQL, JavaScript, MATLAB"
+          },
+          {
+            title: "Data Science",
+            description: "Machine Learning, Statistical Modeling, Data Visualization, Time Series Analysis"
+          },
+          {
+            title: "Tools & Frameworks",
+            description: "TensorFlow, PyTorch, pandas, scikit-learn, AWS, Tableau"
+          }
+        ]}
+      />
+
+      <!-- Download Resume Button -->
+      <div class="mt-8 text-center">
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          class="inline-block px-6 py-3 bg-gruvbox-bg2 hover:bg-gruvbox-bg3 rounded-md transition-colors text-gruvbox-fg"
+        >
+          Download Full Resume
+        </a>
+      </div>
+    </div>
+  </main>
+
+</Layout>

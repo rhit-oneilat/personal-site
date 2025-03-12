@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Project data
+const projects = [
+  {
+    title: "Wholesale Distribution Forecasting",
+    description: "End-to-end inventory forecasting and pricing optimization solution with 95% forecast accuracy. Implemented time series forecasting models using Prophet and integrated with AWS infrastructure for real-time updates and visualization.",
+    tags: ["AWS", "pandas", "Prophet", "Time Series"],
+    image: "/images/forecast-project.jpg",
+    github: "https://github.com/yourusername/forecasting-project"
+  },
+  {
+    title: "Meals on Wheels Analytics",
+    description: "Comprehensive data and analytics overhaul for Meals on Wheels, optimizing food production and delivery. Created ETL pipelines to consolidate data from multiple sources and developed interactive Tableau dashboards for stakeholders.",
+    tags: ["AWS", "Tableau", "ETL", "Data Pipelines"],
+    image: "/images/meals-project.jpg",
+    github: "https://github.com/yourusername/meals-analytics"
+  },
+  {
+    title: "Machine Learning for Sports Analytics",
+    description: "Developed predictive models for player performance and game outcomes using historical data. Implemented ensemble methods including random forests and gradient boosting to improve prediction accuracy.",
+    tags: ["Python", "scikit-learn", "XGBoost", "Sports Analytics"],
+    image: "/images/sports-project.jpg",
+    github: "https://github.com/yourusername/sports-ml"
+  },
+  {
+    title: "Personal Portfolio Website",
+    description: "Designed and developed this website using Astro, React, and TailwindCSS. Features a custom terminal introduction animation and Gruvbox-inspired color scheme.",
+    tags: ["Astro", "React", "TailwindCSS", "Framer Motion"],
+    image: "/images/portfolio-project.jpg",
+    github: "https://github.com/yourusername/personal-site"
+  }
+];
+---
+
+<Layout title="Projects | Aidan O'Neil">
+
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold text-gruvbox-fg mb-8">Projects</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {projects.map(project => (
+        <div class="bg-gruvbox-bg1 rounded-lg shadow-lg overflow-hidden">
+          <div class="h-48 bg-gruvbox-bg2 flex items-center justify-center">
+            {project.image ?
+              <img src={project.image} alt={project.title} class="w-full h-full object-cover" /> :
+              <div class="text-6xl text-gruvbox-fg opacity-20">⚙️</div>
+            }
+          </div>
+
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gruvbox-yellow">{project.title}</h3>
+
+            <div class="flex flex-wrap gap-2 mt-3">
+              {project.tags.map(tag => (
+                <span class="px-2 py-1 bg-gruvbox-bg2 rounded text-xs text-gruvbox-aqua">{tag}</span>
+              ))}
+            </div>
+
+            <p class="mt-4 text-gruvbox-fg">{project.description}</p>
+
+            <div class="mt-6">
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-4 py-2 bg-gruvbox-bg2 hover:bg-gruvbox-bg3 rounded-md transition-colors text-gruvbox-fg"
+              >
+                View Project
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+
+</Layout>
