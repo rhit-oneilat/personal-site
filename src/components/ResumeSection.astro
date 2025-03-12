@@ -1,12 +1,29 @@
 ---
+export interface Item {
+  title: string;
+  subtitle?: string;
+  period?: string;
+  description: string;
+}
 export interface Props {
   title: string;
+  items: Item[];
 }
-
-const { title } = Astro.props;
+const { title, items = [] } = Astro.props;
 ---
-
 <section class="mb-10">
-  <h2 class="text-2xl font-bold text-gruvbox-yellow border-b border-gruvbox-bg3 pb-2 mb-6">{title}</h2>
+  <h2 class="text-2xl font-bold text-gruvbox-fg0 border-b border-gruvbox-bg4 pb-2 mb-6">{title}</h2>
+  <div class="space-y-6">
+    {items.map((item) => (
+      <div class="resume-item">
+        <div class="flex justify-between items-start">
+          <h3 class="text-xl font-semibold text-gruvbox-yellow">{item.title}</h3>
+          {item.period && <span class="text-gruvbox-green italic">{item.period}</span>}
+        </div>
+        {item.subtitle && <h4 class="text-lg text-gruvbox-green mt-1">{item.subtitle}</h4>}
+        <p class="mt-2 text-gruvbox-fg1">{item.description}</p>
+      </div>
+    ))}
+  </div>
   <slot />
 </section>
