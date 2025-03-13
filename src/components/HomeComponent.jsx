@@ -9,12 +9,11 @@ export default function HomeComponent() {
     animationHeight: '30vh',
     contentScale: 1
   });
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     if (!mountRef.current) return;
 
-    // Get header height - assume there's a header with some height
-    // Replace this with actual code to get your header's height
     const headerHeight = document.querySelector('header')?.offsetHeight || 0;
 
     const updateDimensions = () => {
@@ -24,23 +23,24 @@ export default function HomeComponent() {
       const availableHeight = windowHeight - headerHeight;
       const contentHeight = contentRef.current.scrollHeight;
 
-      // Calculate animation height as a percentage of available space
-      // Adjust animation to take 30-40% of available space
       const animationHeightValue = Math.floor(availableHeight * 0.4);
 
-      // Calculate remaining space for content
       const remainingSpace = availableHeight - animationHeightValue;
 
-      // Scale content if needed to fit in remaining space
       let scale = 1;
       if (contentHeight > remainingSpace) {
         scale = remainingSpace / contentHeight;
       }
 
-      setDimensions({
-        animationHeight: `${animationHeightValue}px`,
-        contentScale: scale
-      });
+      // Only update dimensions if they've changed or during initialization
+      if (!isInitialized ||
+          dimensions.animationHeight !== `${animationHeightValue}px` ||
+          dimensions.contentScale !== scale) {
+        setDimensions({
+          animationHeight: `${animationHeightValue}px`,
+          contentScale: scale
+        });
+      }
 
       return {
         width: mountRef.current.clientWidth,
@@ -48,7 +48,9 @@ export default function HomeComponent() {
       };
     };
 
+    // Initialize first to prevent unnecessary re-renders
     const { width, height } = updateDimensions();
+    setIsInitialized(true);
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color('#282828');
@@ -93,24 +95,35 @@ export default function HomeComponent() {
     };
     animate();
 
+    // Debounce the resize handler to prevent excessive updates
+    let resizeTimeout;
     const handleResize = () => {
-      const { width: newWidth, height: newHeight } = updateDimensions();
-      renderer.setSize(newWidth, newHeight);
-      camera.aspect = newWidth / newHeight;
-      camera.updateProjectionMatrix();
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const { width: newWidth, height: newHeight } = updateDimensions();
+        renderer.setSize(newWidth, newHeight);
+        camera.aspect = newWidth / newHeight;
+        camera.updateProjectionMatrix();
+      }, 100);
     };
 
     window.addEventListener('resize', handleResize);
-    const observer = new ResizeObserver(handleResize);
+    const observer = new ResizeObserver(() => {
+      handleResize();
+    });
+
     observer.observe(mountRef.current);
     if (contentRef.current) {
       observer.observe(contentRef.current);
     }
 
-    // Run the resize handler one more time after content has fully rendered
-    setTimeout(handleResize, 100);
+    // Run the resize handler once after content has fully rendered
+    // but make sure it's only run once
+    const initTimeout = setTimeout(handleResize, 300);
 
     return () => {
+      clearTimeout(resizeTimeout);
+      clearTimeout(initTimeout);
       window.removeEventListener('resize', handleResize);
       observer.disconnect();
       if (mountRef.current && mountRef.current.contains(renderer.domElement)) {
@@ -146,7 +159,7 @@ export default function HomeComponent() {
           Mathematician | Data Scientist | Engineer
         </p>
         <p className="mt-4 md:mt-6 text-lg md:text-xl text-gruvbox-fg3 text-center max-w-3xl">
-          Transforming complex problems into elegant solutions through mathematics and code.
+          Finding the patterns others miss.
         </p>
         <div className="mt-6 md:mt-8 flex flex-wrap gap-4 md:gap-6 justify-center">
           <a href="/resume" className="px-6 py-3 text-lg md:text-xl bg-gruvbox-orange rounded-lg font-medium hover:shadow-lg transition-all duration-300">
