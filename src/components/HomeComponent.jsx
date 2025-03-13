@@ -1,17 +1,54 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import * as THREE from 'three';
 
 export default function HomeComponent() {
   const mountRef = useRef(null);
+  const contentRef = useRef(null);
+  const [dimensions, setDimensions] = useState({
+    animationHeight: '30vh',
+    contentScale: 1
+  });
 
   useEffect(() => {
     if (!mountRef.current) return;
 
-    console.log("Initializing Three.js scene");
+    // Get header height - assume there's a header with some height
+    // Replace this with actual code to get your header's height
+    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
 
-    const width = mountRef.current.clientWidth;
-    const height = mountRef.current.clientHeight;
+    const updateDimensions = () => {
+      if (!mountRef.current || !contentRef.current) return;
+
+      const windowHeight = window.innerHeight;
+      const availableHeight = windowHeight - headerHeight;
+      const contentHeight = contentRef.current.scrollHeight;
+
+      // Calculate animation height as a percentage of available space
+      // Adjust animation to take 30-40% of available space
+      const animationHeightValue = Math.floor(availableHeight * 0.4);
+
+      // Calculate remaining space for content
+      const remainingSpace = availableHeight - animationHeightValue;
+
+      // Scale content if needed to fit in remaining space
+      let scale = 1;
+      if (contentHeight > remainingSpace) {
+        scale = remainingSpace / contentHeight;
+      }
+
+      setDimensions({
+        animationHeight: `${animationHeightValue}px`,
+        contentScale: scale
+      });
+
+      return {
+        width: mountRef.current.clientWidth,
+        height: animationHeightValue
+      };
+    };
+
+    const { width, height } = updateDimensions();
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color('#282828');
@@ -30,7 +67,7 @@ export default function HomeComponent() {
     for (let i = 0; i < particleCount; i++) {
       const phi = Math.acos(2 * Math.random() - 1);
       const theta = Math.random() * 2 * Math.PI;
-      const radius = 5;
+      const radius = 6;
 
       positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
       positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
@@ -57,19 +94,28 @@ export default function HomeComponent() {
     animate();
 
     const handleResize = () => {
-      const newWidth = mountRef.current.clientWidth;
-      const newHeight = mountRef.current.clientHeight;
+      const { width: newWidth, height: newHeight } = updateDimensions();
       renderer.setSize(newWidth, newHeight);
       camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
     };
 
+    window.addEventListener('resize', handleResize);
     const observer = new ResizeObserver(handleResize);
     observer.observe(mountRef.current);
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+
+    // Run the resize handler one more time after content has fully rendered
+    setTimeout(handleResize, 100);
 
     return () => {
+      window.removeEventListener('resize', handleResize);
       observer.disconnect();
-      mountRef.current.removeChild(renderer.domElement);
+      if (mountRef.current && mountRef.current.contains(renderer.domElement)) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
       geometry.dispose();
       material.dispose();
       renderer.dispose();
@@ -77,37 +123,47 @@ export default function HomeComponent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gruvbox-bg text-gruvbox-fg flex flex-col items-center relative">
-      <div className="absolute top-0 left-0 w-full h-1/2 z-0 pointer-events-none">
+    <div className="h-[calc(100vh-var(--header-height,0px))] bg-gruvbox-bg text-gruvbox-fg flex flex-col overflow-hidden">
+      <div
+        className="w-full pointer-events-none"
+        style={{ height: dimensions.animationHeight }}
+      >
         <div ref={mountRef} className="w-full h-full" />
       </div>
 
-      <div className="flex flex-col items-center justify-end h-screen w-full px-4 md:px-8 relative pb-20">
-        <h1 className="text-5xl md:text-6xl font-bold text-gruvbox-orange relative">
+      <div
+        ref={contentRef}
+        className="flex flex-col items-center justify-center w-full px-4 md:px-8 flex-grow"
+        style={{
+          transform: `scale(${dimensions.contentScale})`,
+          transformOrigin: 'center center'
+        }}
+      >
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gruvbox-orange text-center">
           Aidan O'Neil
         </h1>
-        <p className="mt-6 text-3xl text-gruvbox-fg2 relative">
+        <p className="mt-4 md:mt-6 text-xl md:text-2xl lg:text-3xl text-gruvbox-fg2 text-center">
           Mathematician | Data Scientist | Engineer
         </p>
-        <p className="mt-8 text-xl text-gruvbox-fg3 text-center max-w-3xl relative">
+        <p className="mt-4 md:mt-6 text-lg md:text-xl text-gruvbox-fg3 text-center max-w-3xl">
           Transforming complex problems into elegant solutions through mathematics and code.
         </p>
-        <div className="mt-10 flex flex-wrap gap-6 justify-center relative">
-          <a href="/resume" className="px-8 py-4 text-xl bg-gruvbox-orange rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+        <div className="mt-6 md:mt-8 flex flex-wrap gap-4 md:gap-6 justify-center">
+          <a href="/resume" className="px-6 py-3 text-lg md:text-xl bg-gruvbox-orange rounded-lg font-medium hover:shadow-lg transition-all duration-300">
             View My Resume
           </a>
-          <a href="/projects" className="px-8 py-4 text-xl bg-gruvbox-bg1 border border-gruvbox-bg3 rounded-lg font-medium hover:bg-gruvbox-bg2 transition-all duration-300">
+          <a href="/projects" className="px-6 py-3 text-lg md:text-xl bg-gruvbox-bg1 border border-gruvbox-bg3 rounded-lg font-medium hover:bg-gruvbox-bg2 transition-all duration-300">
             Check Out My Work
           </a>
         </div>
-        <div className="mt-12 flex justify-center gap-8 relative">
-          <a href="https://github.com/yourgithub" className="text-gruvbox-fg4 hover:text-gruvbox-fg0 transition-colors duration-300 text-4xl">
+        <div className="mt-6 md:mt-8 flex justify-center gap-6 md:gap-8">
+          <a href="https://github.com/yourgithub" className="text-gruvbox-fg4 hover:text-gruvbox-fg0 transition-colors duration-300 text-3xl md:text-4xl">
             <FaGithub />
           </a>
-          <a href="https://linkedin.com/in/aidan-o-neil" className="text-gruvbox-fg4 hover:text-gruvbox-fg0 transition-colors duration-300 text-4xl">
+          <a href="https://linkedin.com/in/aidan-o-neil" className="text-gruvbox-fg4 hover:text-gruvbox-fg0 transition-colors duration-300 text-3xl md:text-4xl">
             <FaLinkedin />
           </a>
-          <a href="mailto:oneilat@rose-hulman.edu" className="text-gruvbox-fg4 hover:text-gruvbox-fg0 transition-colors duration-300 text-4xl">
+          <a href="mailto:oneilat@rose-hulman.edu" className="text-gruvbox-fg4 hover:text-gruvbox-fg0 transition-colors duration-300 text-3xl md:text-4xl">
             <FaEnvelope />
           </a>
         </div>

@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SkillsNetwork from '../components/SkillsNetwork.jsx';
+import SkillsBoard from '../components/SkillsBoard.jsx';
 ---
 
 <Layout title="About Me | Aidan O'Neil">
@@ -41,7 +43,7 @@ import Footer from '../components/Footer.astro';
 
     <!-- Timeline Section -->
     <section class="mb-16">
-      <h2 class="text-3xl font-bold text-gruvbox-yellow mb-8 text-center">My Timeline</h2>
+      <h2 class="text-3xl font-bold text-gruvbox-yellow mb-8 text-center">My Experience</h2>
 
       <div class="relative">
         <!-- Vertical line -->
@@ -83,22 +85,10 @@ import Footer from '../components/Footer.astro';
                 </details>
               </div>
             </div>
-          </div>
+         </div>
 
-          <!-- RHIT Work -->
+                    <!-- Co-founder -->
           <div class="timeline-item right">
-            <div class="content">
-              <span class="date">Aug 2022 - Present</span>
-              <h3 class="text-xl font-bold text-gruvbox-yellow">AskRose Supervisor & Math Department Grader</h3>
-              <h4 class="text-lg font-semibold">Rose-Hulman Institute of Technology</h4>
-              <p>
-                Provided STEM tutoring, led a team of tutors, graded Calculus and Linear Algebra assignments, and improved grading consistency.
-              </p>
-            </div>
-          </div>
-
-          <!-- Co-founder -->
-          <div class="timeline-item left">
             <div class="content">
               <span class="date">Apr 2023 - Dec 2024</span>
               <h3 class="text-xl font-bold text-gruvbox-purple">Co-Founder & Director of Operations</h3>
@@ -108,91 +98,36 @@ import Footer from '../components/Footer.astro';
               </p>
             </div>
           </div>
+
+
+          <!-- RHIT Work -->
+          <div class="timeline-item left">
+            <div class="content">
+              <span class="date">Aug 2022 - Present</span>
+              <h3 class="text-xl font-bold text-gruvbox-aqua">AskRose Supervisor & Math Department Grader</h3>
+              <h4 class="text-lg font-semibold">Rose-Hulman Institute of Technology</h4>
+              <p>
+                Provided remote STEM tutoring to K-12 students, led a team of tutors, graded Calculus and Linear Algebra assignments, and improved grading consistency.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Skills Section -->
     <section class="mb-16">
-      <h2 class="text-3xl font-bold text-gruvbox-blue mb-8 text-center">My Toolbox</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Tech Skills -->
-        <div class="skill-card bg-gruvbox-bg2 rounded-lg p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold text-gruvbox-aqua mb-4">Programming</h3>
-          <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Rust</span>
-            <span class="skill-tag">R</span>
-            <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">C</span>
-                        <span class="skill-tag">Bash</span>
-
-                    </div>
-        </div>
-
-        <div class="skill-card bg-gruvbox-bg2 rounded-lg p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold text-gruvbox-green mb-4">ML & Data Science</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">scikit-learn</span>
-            <span class="skill-tag">Torch</span>
-            <span class="skill-tag">XGBoost</span>
-            <span class="skill-tag">Prophet</span>
-            <span class="skill-tag">pandas</span>
-            <span class="skill-tag">NumPy</span>
-          </div>
-        </div>
-
-        <div class="skill-card bg-gruvbox-bg2 rounded-lg p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold text-gruvbox-orange mb-4">Data Visualization</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">Tableau</span>
-            <span class="skill-tag">Matplotlib</span>
-            <span class="skill-tag">Seaborn</span>
-            <span class="skill-tag">Plotly</span>
-          </div>
-        </div>
-
-        <div class="skill-card bg-gruvbox-bg2 rounded-lg p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold text-gruvbox-red mb-4">Development Tools</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">AWS</span>
-            <span class="skill-tag">Jupyter</span>
-            <span class="skill-tag">Kubernetes</span>
-            <span class="skill-tag">Git</span>
-          </div>
-        </div>
-
-        <div class="skill-card bg-gruvbox-bg2 rounded-lg p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold text-gruvbox-purple mb-4">Databases</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">PostgreSQL</span>
-            <span class="skill-tag">MongoDB</span>
-                        <span class="skill-tag">SQLite</span>
-                    <span class="skill-tag">Neo4j</span>
-
-          </div>
-        </div>
-
-        <div class="skill-card bg-gruvbox-bg2 rounded-lg p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold text-gruvbox-yellow mb-4">Web Development</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag">React</span>
-                        <span class="skill-tag">Next.js</span>
-                        <span class="skill-tag">Astro</span>
-                        <span class="skill-tag">Tailwind CSS</span>
-            <span class="skill-tag">Flask</span>
-            <span class="skill-tag">Django</span>
-
-          </div>
+      <h2 class="text-3xl font-bold text-gruvbox-yellow mb-8 text-center">My Toolbox</h2>
+      <div class="w-full flex justify-center items-center">
+        <div class="w-screen max-w-screen-2xl"> <!-- Full width container -->
+          <SkillsBoard client:load />
         </div>
       </div>
     </section>
 
-    <!-- Interests Section (Optional) -->
+    <!-- Interests Section -->
     <section class="mb-16">
-      <h2 class="text-3xl font-bold text-gruvbox-red mb-8 text-center">Beyond Work</h2>
+      <h2 class="text-3xl font-bold text-gruvbox-yellow mb-8 text-center">Beyond Work</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
         <div class="bg-gruvbox-bg2 rounded-lg p-6 hover:shadow-lg transition-shadow">
@@ -217,7 +152,7 @@ import Footer from '../components/Footer.astro';
 
     <!-- Contact Section -->
     <section id="contact" class="bg-gruvbox-bg1 rounded-lg shadow-xl p-8 text-center">
-      <h2 class="text-3xl font-bold text-gruvbox-purple mb-6">Let's Connect</h2>
+            <h2 class="text-3xl font-bold text-gruvbox-purple mb-6">Talk to Me!</h2>
       <p class="text-xl mb-6">Interested in working together or just want to chat?</p>
 
       <div class="flex justify-center gap-4">
@@ -304,11 +239,17 @@ import Footer from '../components/Footer.astro';
 
   .skill-tag {
     display: inline-block;
-    padding: 0.5rem 1rem;
     background: var(--gruvbox-bg0);
     border-radius: 2rem;
     margin-bottom: 0.5rem;
-    transition: transform 0.2s;
+    padding: 0.5rem 0.9rem;  /* Increased padding for better spacing */
+    border-radius: 0.375rem;
+    font-size: 1rem;  /* Increased from 0.875rem */
+    font-weight: 600;  /* Made slightly bolder */
+    letter-spacing: 0.01em;  /* Slight letter spacing for readability */
+    transition: all 0.2s;
+    color: #ebdbb2;  /* Light text color for contrast against dark background */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);  /* Subtle text shadow for depth */
   }
 
   .skill-tag:hover {
