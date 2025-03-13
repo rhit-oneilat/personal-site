@@ -6,13 +6,33 @@ import Footer from '../components/Footer.astro';
 // Project data
 const projects = [
   {
-    title: "This Website",
-        description: "Built with Atro, Tailwind CSS, React, and Three.js. Hosted on Cloudflare Pages. Serves as a portfolio and blog.",
-        tags: ["Web Development", "React", "Tailwind CSS", "Three.js"],
-    image: "./forecast-project.jpg",
-        github: "https://github.com/rhit-oneilat/personal-site",
+    title: "Wholesale Distribution Forecasting",
+    description: "End-to-end inventory forecasting and pricing optimization solution with 95% forecast accuracy. Implemented time series forecasting models using Prophet and integrated with AWS infrastructure for real-time updates and visualization.",
+    tags: ["AWS", "pandas", "Prophet", "Time Series"],
+    image: "/images/forecast-project.jpg",
+    github: "https://github.com/yourusername/forecasting-project"
   },
-
+  {
+    title: "Meals on Wheels Analytics",
+    description: "Comprehensive data and analytics overhaul for Meals on Wheels, optimizing food production and delivery. Created ETL pipelines to consolidate data from multiple sources and developed interactive Tableau dashboards for stakeholders.",
+    tags: ["AWS", "Tableau", "ETL", "Data Pipelines"],
+    image: "/images/meals-project.jpg",
+    github: "https://github.com/yourusername/meals-analytics"
+  },
+  {
+    title: "Machine Learning for Sports Analytics",
+    description: "Developed predictive models for player performance and game outcomes using historical data. Implemented ensemble methods including random forests and gradient boosting to improve prediction accuracy.",
+    tags: ["Python", "scikit-learn", "XGBoost", "Sports Analytics"],
+    image: "/images/sports-project.jpg",
+    github: "https://github.com/yourusername/sports-ml"
+  },
+  {
+    title: "Personal Portfolio Website",
+    description: "Designed and developed this website using Astro, React, and TailwindCSS. Features a custom terminal introduction animation and Gruvbox-inspired color scheme.",
+    tags: ["Astro", "React", "TailwindCSS", "Framer Motion"],
+    image: "/images/portfolio-project.jpg",
+    github: "https://github.com/yourusername/personal-site"
+  }
 ];
 ---
 
