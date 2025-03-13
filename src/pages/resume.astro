@@ -7,27 +7,27 @@ import ResumeSection from '../components/ResumeSection.astro';
 
 <Layout title="Resume | Aidan O'Neil">
 
-  <main class="max-w-3xl mx-auto px-4 py-12">
-    <h1 class="text-4xl font-bold text-gruvbox-fg mb-8">Resume</h1>
+  <main class="max-w-16xl mx-auto px-8 py-16">
+    <h1 class="text-6xl font-bold text-gruvbox-orange mb-12 text-center">Resume</h1>
 
-    <div class="bg-gruvbox-bg1 rounded-lg shadow-xl p-8">
+    <div class="bg-gruvbox-bg1 rounded-lg shadow-2xl p-12 text-lg">
       <!-- Education Section -->
       <ResumeSection
         title="Education"
-        items={[
+items={[
           {
             title: "Rose-Hulman Institute of Technology",
             subtitle: "B.S. Mathematics & Data Science, Minor in Economics",
             period: "2022 - 2026",
             description: "Relevant coursework: Abstract Algebra, Database Systems, Linear Algebra, Artificial Intelligence, Data Mining. Extracurriculars: Phi Gamma Delta Member, Shakespeare Club Treasurer."
           }
-        ]}
+]}
       />
 
       <!-- Experience Section -->
       <ResumeSection
         title="Experience"
-        items={[
+items={[
           {
             title: "Summer Games Intern",
             subtitle: "Booz Allen Hamilton",
@@ -46,64 +46,60 @@ import ResumeSection from '../components/ResumeSection.astro';
             period: "Apr 2023 - Dec 2024",
             description: "Led a data science consulting firm delivering process optimization and cloud-based data solutions to SMBs."
           }
-        ]}
-      />
-
-      <!-- Projects Section -->
-      <ResumeSection
-        title="Selected Projects"
-        items={[
-          {
-            title: "Wholesale Distribution Forecasting & Pricing Analytics",
-            subtitle: "AWS (S3, Lambda, SageMaker), pandas, Prophet",
-            period: "Jan 2024 - Nov 2024",
-            description: "Developed an end-to-end inventory forecasting solution, leveraging ML models for 95% forecast accuracy."
-          },
-          {
-            title: "Meals on Wheels Data & Analytics Transformation",
-            subtitle: "AWS (Glue, Lambda), pandas, Tableau",
-            period: "Feb 2024 - Aug 2024",
-            description: "Designed an AWS-based data platform to optimize food production and delivery through data consolidation and automation."
-          },
-          {
-            title: "Fraud Detection in Airbnb Listings",
-            subtitle: "R, XGBoost",
-            period: "May 2023 - Aug 2023",
-            description: "Built an XGBoost-based model for detecting fraudulent Airbnb listings, improving platform security."
-          }
-        ]}
+]}
       />
 
       <!-- Skills Section -->
       <ResumeSection
-        title="Skills"
-        items={[
-          {
-            title: "Programming",
-            description: "Python, R, SQL, JavaScript, MATLAB"
-          },
-          {
-            title: "Data Science",
-            description: "Machine Learning, Statistical Modeling, Data Visualization, Time Series Analysis"
-          },
-          {
-            title: "Tools & Frameworks",
-            description: "TensorFlow, PyTorch, pandas, scikit-learn, AWS, Tableau"
-          }
-        ]}
-      />
-
+          title="Skills"
+items={[
+            {
+              title: "Programming Languages",
+              description: "Python, R, SQL, Java, HTML/CSS"
+            },
+            {
+              title: "Development Tools",
+              description: "AWS (S3, Lambda, SageMaker, Glue), Google Colab, Jupyter, Kubernetes"
+            },
+            {
+              title: "Libraries & Frameworks",
+              description: "XGBoost, Prophet, scikit-learn, PyTorch, pandas, NumPy"
+            },
+            {
+              title: "Data Visualization",
+              description: "Tableau, Matplotlib, Seaborn, Plotly"
+            },
+            {
+              title: "Database Management",
+              description: "SQL, MongoDB"
+            },
+            {
+              title: "Version Control",
+              description: "Git, GitHub"
+            },
+            {
+              title: "Foreign Languages",
+              description: "Mandarin Chinese (HSK 3.5)"
+            },
+            {
+              title: "Typesetting",
+              description: "LaTeX"
+            }
+]}
+        />
       <!-- Download Resume Button -->
-      <div class="mt-8 text-center">
+      <div class="mt-12 text-center">
         <a
           href="/resume.pdf"
           target="_blank"
-          class="inline-block px-6 py-3 bg-gruvbox-bg2 hover:bg-gruvbox-bg3 rounded-md transition-colors text-gruvbox-fg"
+          class="inline-block px-8 py-4 bg-gruvbox-bg2 hover:bg-gruvbox-bg3 rounded-lg transition-colors text-xl text-gruvbox-fg"
         >
           Download Full Resume
         </a>
       </div>
     </div>
   </main>
+
+  <Footer class="w-full" />
 
 </Layout>
