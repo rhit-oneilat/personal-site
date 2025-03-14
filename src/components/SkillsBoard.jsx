@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const skills = {
-  'Programming Languages': ['Python', 'Rust', 'Java', 'TypeScript', 'Scala'],
+  'Programming Languages': ['Python', 'Rust', 'Java', 'TypeScript'],
   'Development Tools': ['AWS S3','AWS Lambda', 'AWS SageMaker', 'Docker', 'Git'],
   'Libraries/Frameworks': ['XGBoost', 'scikit-learn', 'PyTorch', 'pandas', 'NumPy', 'Dask', 'LangChain'],
   'Data Visualization': ['Tableau', 'Matplotlib', 'Seaborn', 'Plotly'],
