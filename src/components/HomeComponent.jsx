@@ -19,15 +19,12 @@ export default function HomeComponent() {
 
       {/* Centered content */}
       <div className="relative z-10 w-full h-full flex items-center justify-center px-4">
-        <div className="bg-gruvbox-bg/80 backdrop-blur-md border border-gruvbox-bg3 rounded-xl p-8 md:p-12 max-w-2xl text-center shadow-xl">
+        <div className="bg-gruvbox-bg border border-gruvbox-bg3 rounded-xl p-8 md:p-12 max-w-2xl text-center shadow-xl">
           <h1 className="text-4xl md:text-5xl font-bold text-gruvbox-orange">
             Aidan O'Neil
           </h1>
           <p className="mt-4 text-xl md:text-2xl text-gruvbox-fg2">
-            Mathematician | Data Scientist | Engineer
-          </p>
-          <p className="mt-4 text-lg text-gruvbox-fg3">
-            Finding the patterns others miss.
+            Mathematician, Data Scientist, and Engineer
           </p>
           <div className="mt-6 flex flex-wrap gap-4 justify-center">
             <a

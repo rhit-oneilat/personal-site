@@ -23,6 +23,7 @@ export default function P5Sketch() {
   const setup = (p5, canvasParentRef) => {
     p5.createCanvas(p5.windowWidth, p5.windowHeight).parent(canvasParentRef);
     p5.frameRate(30);
+    p5.colorMode(p5.RGB, 255);
     initGrid(p5);
   };
 
@@ -56,7 +57,6 @@ function generateTerrain(p5, theta) {
     for (let y = 0; y < rows; y++) {
       let xoff = x * 0.05;
       let yoff = y * 0.05;
-
       let loopX = R * Math.cos(loopAngle);
       let loopY = R * Math.sin(loopAngle);
 
@@ -86,8 +86,14 @@ function drawContours(p5) {
     { level: 45, color: brightGruvbox.gray2 }
   ];
 
+  p5.noStroke();
+
   for (let { level, color } of contourLevels) {
-    p5.fill(color + 'AA');
+    const col = p5.color(color);
+    col.setAlpha(220);
+    p5.fill(col);
+
+    console.log('Drawing contour at level:', level, 'with color:', color);
     drawDotsAtContour(p5, level, 1.3);
   }
 }
