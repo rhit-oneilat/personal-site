@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-import P5Sketch from './P5Sketch.jsx';
 
 export default function HomeComponent() {
+  const [P5Sketch, setP5Sketch] = useState(null);
+
+  useEffect(() => {
+    import('./P5Sketch.jsx').then((mod) => {
+      setP5Sketch(() => mod.default);
+    });
+  }, []);
+
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-gruvbox-bg text-gruvbox-fg">
-      {/* Background animation */}
+      {/* Background animation (only loaded client-side) */}
       <div className="absolute inset-0 z-0">
-        <P5Sketch />
+        {P5Sketch ? <P5Sketch /> : null}
       </div>
 
-      {/* Centered card */}
+      {/* Centered content */}
       <div className="relative z-10 w-full h-full flex items-center justify-center px-4">
         <div className="bg-gruvbox-bg/80 backdrop-blur-md border border-gruvbox-bg3 rounded-xl p-8 md:p-12 max-w-2xl text-center shadow-xl">
           <h1 className="text-4xl md:text-5xl font-bold text-gruvbox-orange">
@@ -22,7 +29,6 @@ export default function HomeComponent() {
           <p className="mt-4 text-lg text-gruvbox-fg3">
             Finding the patterns others miss.
           </p>
-
           <div className="mt-6 flex flex-wrap gap-4 justify-center">
             <a
               href="/resume"
@@ -37,7 +43,6 @@ export default function HomeComponent() {
               Check Out My Work
             </a>
           </div>
-
           <div className="mt-6 flex justify-center gap-6">
             <a
               href="https://github.com/yourgithub"
