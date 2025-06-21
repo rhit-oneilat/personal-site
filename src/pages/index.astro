@@ -1,9 +1,16 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import HomeComponent from '../components/HomeComponent';
+import HomeComponent from '../components/HomeComponent.jsx';
+import '../styles/global.css';
 ---
 
-<Layout title="Home">
-
-        <HomeComponent client:load />
-</Layout>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Aidan O'Neil</title>
+  </head>
+  <body class="m-0 p-0">
+    <HomeComponent client:load />
+  </body>
+</html>

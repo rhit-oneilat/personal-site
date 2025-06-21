@@ -1,21 +1,18 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-
-// Lazy-load p5 sketch only on client side
-const Sketch = dynamic(() => import('./P5Sketch'), { ssr: false });
+import P5Sketch from './P5Sketch.jsx';
 
 export default function HomeComponent() {
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-gruvbox-bg text-gruvbox-fg">
       {/* Background animation */}
       <div className="absolute inset-0 z-0">
-        <Sketch />
+        <P5Sketch />
       </div>
 
-      {/* Centered card content */}
+      {/* Centered card */}
       <div className="relative z-10 w-full h-full flex items-center justify-center px-4">
-        <div className="bg-gruvbox-bg/80 backdrop-blur-md border border-gruvbox-bg3 rounded-xl p-8 md:p-12 max-w-2xl text-center shadow-xl transition-all">
+        <div className="bg-gruvbox-bg/80 backdrop-blur-md border border-gruvbox-bg3 rounded-xl p-8 md:p-12 max-w-2xl text-center shadow-xl">
           <h1 className="text-4xl md:text-5xl font-bold text-gruvbox-orange">
             Aidan O'Neil
           </h1>
@@ -27,22 +24,37 @@ export default function HomeComponent() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-4 justify-center">
-            <a href="/resume" className="px-6 py-3 text-lg bg-gruvbox-orange rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+            <a
+              href="/resume"
+              className="px-6 py-3 text-lg bg-gruvbox-orange rounded-lg font-medium hover:shadow-lg transition-all duration-300"
+            >
               View My Resume
             </a>
-            <a href="/projects" className="px-6 py-3 text-lg bg-gruvbox-bg1 border border-gruvbox-bg3 rounded-lg font-medium hover:bg-gruvbox-bg2 transition-all duration-300">
+            <a
+              href="/projects"
+              className="px-6 py-3 text-lg bg-gruvbox-bg1 border border-gruvbox-bg3 rounded-lg font-medium hover:bg-gruvbox-bg2 transition-all duration-300"
+            >
               Check Out My Work
             </a>
           </div>
 
           <div className="mt-6 flex justify-center gap-6">
-            <a href="https://github.com/yourgithub" className="text-gruvbox-fg4 hover:text-gruvbox-fg0 text-3xl transition-colors duration-300">
+            <a
+              href="https://github.com/yourgithub"
+              className="text-gruvbox-fg4 hover:text-gruvbox-fg0 text-3xl transition-colors duration-300"
+            >
               <FaGithub />
             </a>
-            <a href="https://linkedin.com/in/aidan-o-neil" className="text-gruvbox-fg4 hover:text-gruvbox-fg0 text-3xl transition-colors duration-300">
+            <a
+              href="https://linkedin.com/in/aidan-o-neil"
+              className="text-gruvbox-fg4 hover:text-gruvbox-fg0 text-3xl transition-colors duration-300"
+            >
               <FaLinkedin />
             </a>
-            <a href="mailto:oneilat@rose-hulman.edu" className="text-gruvbox-fg4 hover:text-gruvbox-fg0 text-3xl transition-colors duration-300">
+            <a
+              href="mailto:oneilat@rose-hulman.edu"
+              className="text-gruvbox-fg4 hover:text-gruvbox-fg0 text-3xl transition-colors duration-300"
+            >
               <FaEnvelope />
             </a>
           </div>
